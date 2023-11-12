@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type ScoresGrammar {
+  g7 Int
+  g8 Int
+  g9 Int
+}
+
+type ScoresListening {
+  l1 Int
+  l2 Int
+  l3 Int
+  l4 Int
+  l5 Int
+}
+
+type ScoresReading {
+  r10   Int
+  r11_1 Int
+  r11_2 Int
+  r12   Int
+  r13   Int
+  r14   Int
+}
+
+type ScoresVocabulary {
+  v1 Int
+  v2 Int
+  v3 Int
+  v4 Int
+  v5 Int
+  v6 Int
+}
+
+model scores {
+  id               String           @id @default(auto()) @map("_id") @db.ObjectId
+  v                Int              @map("__v")
+  grammar          ScoresGrammar
+  grammar_score    Int
+  listening        ScoresListening
+  listening_score  Int
+  reading          ScoresReading
+  reading_score    Int
+  title            String
+  total_score      Int
+  user_email       String
+  // user_id          String
+  vocabulary       ScoresVocabulary
+  vocabulary_score Int
+}
+
+model users {
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  v            Int     @map("__v")
+  avatar       String?
+  email        String
+  hash         String
+  salt         String
+  sessionToken String?
+  username     String
+}
