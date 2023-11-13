@@ -3,7 +3,7 @@ import {signIn} from "next-auth/react";
 import {Button} from "@/components/ui/button";
 import {Github} from "lucide-react";
 
-export default async function OAuthSignIn() {
+export default function OAuthSignIn() {
 	return (
 		<Button
 			onClick={() => signIn('github', {

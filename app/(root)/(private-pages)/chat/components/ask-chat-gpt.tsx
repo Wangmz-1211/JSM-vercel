@@ -28,7 +28,6 @@ const AskChatGPT = (
 		} & any
 	}) => {
 
-	if (!session) return null
 
 	const [waiting, setWaiting] = useState(false)
 
@@ -41,6 +40,7 @@ const AskChatGPT = (
 
 	})
 
+	if (!session) return null
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		setWaiting(true)
 		await fetch('/api/chat', {
