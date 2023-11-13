@@ -33,7 +33,10 @@ const ScoreCard = ({score}: { score: any }) => {
 			<SheetTrigger>
 				<Card
 					className="w-64 h-28 relative box-border overflow-clip text-foreground
-				shadow-secondary shadow-md hover:scale-110 hover:z-10 duration-200 hover:shadow-2xl"
+				shadow-secondary shadow-md
+				scale-125 hover:scale-150
+				md:scale-100 md:hover:scale-110
+				hover:z-10 duration-200 hover:shadow-2xl"
 				>
 					<CardHeader>
 						<CardTitle className="absolute left-6">{record.title}</CardTitle>

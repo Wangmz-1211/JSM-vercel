@@ -4,7 +4,7 @@ import OAuthSignIn from "@/app/(root)/(authentication)/sign-in/components/oauth-
 const SignInForm = () => {
 
 	return (
-		<div className="mx-auto w-1/2 md:w-1/3 lg:w-2/5 space-y-3 p-3 rounded-2xl box-border border">
+		<div className="mx-auto w-4/5 md:w-1/2 lg:w-2/5 space-y-3 p-3 rounded-2xl box-border border">
 			<CredentialsForm/>
 			<OAuthSignIn/>
 		</div>

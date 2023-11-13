@@ -64,7 +64,8 @@ const SignUpForm = () => {
 	return (
 		<Form {...form}>
 			<form
-				className="flex w-1/2 md:w-1/3 lg:w-2/5 mx-auto flex-col gap-4 justify-center items-center
+				className="flex w-4/5 md:w-1/2 lg:w-2/5 mx-auto
+				 flex-col gap-4 justify-center items-center
 			 text-sm border border-neutral-300 dark:border-neutral-700 p-4
 			 rounded-xl"
 				onSubmit={form.handleSubmit(onSubmit)}>

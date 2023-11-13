@@ -12,7 +12,6 @@ export async function POST(req: Request) {
 	try {
 		// input check
 		let {email, password} = await req.json()
-		console.log(email, password)
 		if (!email || !password) return Response.json("Please input correct email and password.", {status: 400})
 
 		// get user information from db

@@ -37,7 +37,7 @@ const ScoreList = async () => {
 	})
 
 	return (
-		<div className=" w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-4">
+		<div className=" w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-12 md:gap-y-4 mt-4">
 			{sortedScores.map((score) => {
 					return <ScoreCard key={score.id} score={score}/>
 				}
