@@ -26,7 +26,6 @@ const FormSchema = z.object({
 })
 
 const CredentialsForm = () => {
-	const router = useRouter()
 
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
@@ -36,8 +35,8 @@ const CredentialsForm = () => {
 		}
 	})
 
-	function onSubmit(data: z.infer<typeof FormSchema>) {
-		signIn('credentials', {
+	async function onSubmit(data: z.infer<typeof FormSchema>) {
+		await signIn('credentials', {
 			email: data.email,
 			password: data.password,
 			redirect: true,
@@ -77,7 +76,7 @@ const CredentialsForm = () => {
 						</FormItem>
 					)}
 				/>
-				<Button className="w-full bg-green-700 hover:bg-green-600" type='submit'>Sign up</Button>
+				<Button className="w-full bg-green-700 hover:bg-green-600" type='submit'>Sign in</Button>
 				<span>Don&apos;t have an account? <Link href="/sign-up" className="text-blue-400">Sign up</Link></span>
 			</form>
 		</Form>
