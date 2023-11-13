@@ -35,16 +35,12 @@ const CredentialsForm = () => {
 	})
 
 	function onSubmit(data: z.infer<typeof FormSchema>) {
-		try {
 			signIn('Credentials', {
 				email: data.email,
 				password: data.password,
 				redirect: true,
-				callbackUrl: '/'
+				callbackUrl: process.env.NEXTAUTH_URL
 			})
-		} catch (e) {
-			console.error(e)
-		}
 	}
 
 	return (
