@@ -12,14 +12,9 @@ import {
 	CollapsibleContent,
 	CollapsibleTrigger,
 } from "@/components/ui/collapsible"
-import {
-	SheetFooter,
-	SheetClose
-} from "@/components/ui/sheet";
 import {ChevronDown} from "lucide-react";
 import {useToast} from "@/components/ui/use-toast";
-import {useRouter} from "next/navigation";
-import {Dispatch, useState} from "react";
+import {Dispatch} from "react";
 import ScoreDelete from "@/app/(root)/(private-pages)/score/components/score-delete";
 
 
@@ -140,18 +135,6 @@ const groupsToFieldsMapping: Record<string, Array<fieldNamesType>> = {
 	listening: listeningFields,
 }
 
-const updateRecordDisplay = (record: Record<string, any>, newRecord: Record<string, any>) => {
-	console.log(record, newRecord)
-	record.total_score = newRecord.total_score
-	record.vocabulary = newRecord.vocabulary
-	record.vocabulary_score = newRecord.vocabulary_score
-	record.grammar = newRecord.grammar
-	record.grammar__score = newRecord.grammar_score
-	record.reading = newRecord.reading
-	record.reading_score = newRecord.reading_score
-	record.listening = newRecord.listening
-	record.listening_score = newRecord.listening_score
-}
 export default function ScoreEditForm(
 	{
 		record,
@@ -189,7 +172,6 @@ export default function ScoreEditForm(
 			l5: record.listening.l5,
 		}
 	})
-
 
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {

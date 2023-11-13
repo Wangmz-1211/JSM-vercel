@@ -1,5 +1,4 @@
 import {Progress} from "@/components/ui/progress";
-import {red} from "next/dist/lib/picocolors";
 
 const ScoreCardProgress = ({progress}: { progress: number }) => {
 	return (

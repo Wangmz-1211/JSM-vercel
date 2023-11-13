@@ -90,7 +90,7 @@ const SummaryChartsLine = (
 				},
 			],
 		}
-	}, [records])
+	}, [records, level])
 	return (
 		<Line
 			data={data}
