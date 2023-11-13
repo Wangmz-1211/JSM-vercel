@@ -3,7 +3,6 @@
 
 import {Button} from '@/components/ui/button'
 import {Input} from '@/components/ui/input'
-import {useRouter} from "next/navigation";
 import * as z from "zod"
 import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -35,13 +34,17 @@ const CredentialsForm = () => {
 		}
 	})
 
-	async function onSubmit(data: z.infer<typeof FormSchema>) {
-		await signIn('credentials', {
-			email: data.email,
-			password: data.password,
-			redirect: true,
-			callbackUrl: '/'
-		})
+	function onSubmit(data: z.infer<typeof FormSchema>) {
+		try {
+			signIn('Credentials', {
+				email: data.email,
+				password: data.password,
+				redirect: true,
+				callbackUrl: '/'
+			})
+		} catch (e) {
+			console.error(e)
+		}
 	}
 
 	return (
