@@ -3,8 +3,8 @@ import {
 	DialogContent, DialogDescription, DialogHeader,
 	DialogTrigger,
 } from '@/components/ui/dialog'
-import ScoreCreateCard from "@/app/(root)/(private)/score/components/score-create-card";
-import ScoreCreateForm from "@/app/(root)/(private)/score/components/score-create-form";
+import ScoreCreateCard from "@/app/(root)/(private-pages)/score/components/score-create-card";
+import ScoreCreateForm from "@/app/(root)/(private-pages)/score/components/score-create-form";
 
 
 

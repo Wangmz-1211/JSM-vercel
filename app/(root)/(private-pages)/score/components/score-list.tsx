@@ -1,18 +1,22 @@
+import ScoreCard from "@/app/(root)/(private-pages)/score/components/score-card";
+import prisma from "@/app/(root)/api/lib/PrismaClient";
 import {auth} from "@/lib/auth";
 import {redirect} from "next/navigation";
-import prisma from "@/app/(root)/api/lib/PrismaClient";
-import SummaryChartsLine from "@/app/(root)/(private)/summary/components/summary-charts-line";
+import ScoreCreateDialog from "@/app/(root)/(private-pages)/score/components/score-create-dialog";
 
 
-export const SummaryCharts = async () => {
+const ScoreList = async () => {
+
 	const session = await auth()
 	if (!session) redirect('/sign-in')
-	const records = await prisma.scores.findMany({
+
+	const scores = await prisma.scores.findMany({
 		where: {
 			user_email: session!.user!.email!.toLowerCase()
 		}
 	})
-	const sortedRecords = records.sort((a, b) => {
+
+	const sortedScores = scores.sort((a, b) => {
 		const aTitle = a.title.split('-');
 		const bTitle = b.title.split('-');
 		if (aTitle[0] === bTitle[0]) {
@@ -32,12 +36,15 @@ export const SummaryCharts = async () => {
 		}
 	})
 
-
 	return (
-		<div className="w-full">
-			<SummaryChartsLine records={sortedRecords} level="N2"/>
+		<div className=" w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-12 md:gap-y-4 mt-4">
+			{sortedScores.map((score) => {
+					return <ScoreCard key={score.id} score={score}/>
+				}
+			)}
+			<ScoreCreateDialog/>
 		</div>
+
 	)
 }
-
-export default SummaryCharts
+export default ScoreList

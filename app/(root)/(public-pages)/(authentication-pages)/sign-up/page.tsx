@@ -1,5 +1,5 @@
 import SignUpForm from "./components/sign-up-form";
-import RedirectToHome from "@/app/(root)/(authentication)/components/redirect-to-home";
+import RedirectToHome from "@/app/(root)/(public-pages)/(authentication-pages)/components/redirect-to-home";
 
 const Register = async () => {
 	return (

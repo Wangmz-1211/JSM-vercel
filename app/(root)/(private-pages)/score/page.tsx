@@ -1,4 +1,4 @@
-import ScoreList from "@/app/(root)/(private)/score/components/score-list";
+import ScoreList from "@/app/(root)/(private-pages)/score/components/score-list";
 
 const Score = () => {
 

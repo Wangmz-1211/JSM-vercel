@@ -20,7 +20,7 @@ import {ChevronDown} from "lucide-react";
 import {useToast} from "@/components/ui/use-toast";
 import {useRouter} from "next/navigation";
 import {Dispatch, useState} from "react";
-import ScoreDelete from "@/app/(root)/(private)/score/components/score-delete";
+import ScoreDelete from "@/app/(root)/(private-pages)/score/components/score-delete";
 
 
 const formSchema = z.object({

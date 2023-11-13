@@ -1,4 +1,4 @@
-import SummaryCharts from "@/app/(root)/(private)/summary/components/summary-charts";
+import SummaryCharts from "@/app/(root)/(private-pages)/summary/components/summary-charts";
 
 const Summary = () => {
 	return (

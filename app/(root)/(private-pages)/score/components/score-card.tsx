@@ -2,8 +2,8 @@
 
 import {Card, CardHeader, CardTitle, CardContent} from '@/components/ui/card'
 import {useMemo, useState} from "react";
-import ScoreCardScoreDisplay from "@/app/(root)/(private)/score/components/score-card-score-display";
-import ScoreCardProgress from "@/app/(root)/(private)/score/components/score-card-progress";
+import ScoreCardScoreDisplay from "@/app/(root)/(private-pages)/score/components/score-card-score-display";
+import ScoreCardProgress from "@/app/(root)/(private-pages)/score/components/score-card-progress";
 import {
 	Sheet,
 	SheetContent,
@@ -13,7 +13,7 @@ import {
 	SheetTrigger,
 } from "@/components/ui/sheet"
 import {FileEdit} from "lucide-react";
-import ScoreEditForm from "@/app/(root)/(private)/score/components/score-edit-form";
+import ScoreEditForm from "@/app/(root)/(private-pages)/score/components/score-edit-form";
 
 
 const ScoreCard = ({score}: { score: any }) => {

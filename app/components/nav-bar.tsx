@@ -6,8 +6,7 @@ export default function NavBar() {
 			<NavBarItem href='/'>HOME</NavBarItem>
 			<NavBarItem href='/summary'>SUMMARY</NavBarItem>
 			<NavBarItem href='/score'>SCORE</NavBarItem>
-			{/*<NavBarItem href='/sign-in'>SIGN IN</NavBarItem>*/}
-			{/*<NavBarItem href='/sign-up'>SIGN UP</NavBarItem>*/}
+			<NavBarItem href='/chat'>CHAT</NavBarItem>
 		</nav>
 	)
 }
