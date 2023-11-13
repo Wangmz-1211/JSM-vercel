@@ -31,7 +31,7 @@ export const config = {
 			},
 			// @ts-ignore
 			async authorize(credentials, req) {
-				const res = await fetch("http://localhost:3000/api/user/login", {
+				const res = await fetch(process.env.NEXTAUTH_URL + "/api/user/login", {
 					method: 'POST',
 					body: JSON.stringify(credentials),
 					headers: {
