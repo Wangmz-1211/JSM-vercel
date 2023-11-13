@@ -66,3 +66,17 @@ model users {
   sessionToken String?
   username     String
 }
+
+// chat
+
+type message {
+  role    String
+  content String
+}
+
+model chats {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  v          Int       @map("__v")
+  messages   message[]
+  user_email String
+}
