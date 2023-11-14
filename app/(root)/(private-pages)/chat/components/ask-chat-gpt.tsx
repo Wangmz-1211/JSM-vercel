@@ -41,9 +41,9 @@ const AskChatGPT = (
 	})
 
 	if (!session) return null
-	const onSubmit = (values: z.infer<typeof formSchema>) => {
+	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		setWaiting(true)
-		fetch(`${process.env.NEXTAUTH_URL}/api/chat`, {
+		const res = await fetch(`${process.env.NEXTAUTH_URL}/api/chat`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -59,10 +59,12 @@ const AskChatGPT = (
 					]
 				}
 			})
-		}).then(() => {
-			setWaiting(false)
-			document.location.reload()
 		})
+		const message = res.json()
+		console.log(message)
+		setWaiting(false)
+		// document.location.reload()
+
 	}
 
 	return (
