@@ -43,7 +43,7 @@ const AskChatGPT = (
 	if (!session) return null
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
 		setWaiting(true)
-		const res = await fetch(`${process.env.NEXTAUTH_URL}/api/chat`, {
+		const res = await fetch('/api/chat', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
