@@ -41,9 +41,9 @@ const AskChatGPT = (
 	})
 
 	if (!session) return null
-	const onSubmit = async (values: z.infer<typeof formSchema>) => {
+	const onSubmit = (values: z.infer<typeof formSchema>) => {
 		setWaiting(true)
-		await fetch('/api/chat', {
+		fetch(`${process.env.NEXTAUTH_URL}/api/chat`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -54,15 +54,15 @@ const AskChatGPT = (
 					id: 'new',
 					user_email: session.user.email,
 					messages: [
-						{role: 'system', content: 'You are a Japanese language teacher.'},
+						{role: 'system', content: 'You are a Japanese language teacher. Focusing on JLPT Test.'},
 						{role: 'user', content: values.message}
 					]
 				}
 			})
+		}).then(() => {
+			setWaiting(false)
+			document.location.reload()
 		})
-		setWaiting(false)
-		document.location.reload()
-
 	}
 
 	return (
