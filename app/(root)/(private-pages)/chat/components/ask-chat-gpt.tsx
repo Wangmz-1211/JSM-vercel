@@ -60,7 +60,7 @@ const AskChatGPT = (
 				}
 			})
 		})
-		const message = res.json()
+		const message = await res.json()
 		console.log(message)
 		setWaiting(false)
 		// document.location.reload()
