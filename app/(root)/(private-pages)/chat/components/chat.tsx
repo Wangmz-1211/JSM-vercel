@@ -12,6 +12,7 @@ export default function Chat() {
     const {messages, input, handleInputChange, handleSubmit} = useChat();
 
     useEffect(() => {
+        // @ts-ignore
         bottomRef.current?.scrollIntoView({behavior: 'smooth'})
     }, [messages]);
 
