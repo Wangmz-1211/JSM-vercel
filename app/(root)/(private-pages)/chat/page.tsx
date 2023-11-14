@@ -1,18 +1,18 @@
-import AskChatGPT from "@/app/(root)/(private-pages)/chat/components/ask-chat-gpt";
-import ChatHistory from "@/app/(root)/(private-pages)/chat/components/chat-history";
+import Chat from "@/app/(root)/(private-pages)/chat/components/chat";
 import {auth} from "@/lib/auth";
+import {redirect} from "next/navigation";
 
 const ChatPage = async () => {
-	const session = await auth()
-	return (
-		<main className="pt-4 h-full w-full
-		flex-1 justify-start items-center">
-			<div className=" w-2/3 text-center mx-auto">
-				<h2 className="text-bold text-3xl">Have some question?</h2>
-				<AskChatGPT session={session}/>
-				<ChatHistory/>
-			</div>
-		</main>
-	);
+    const session = await auth()
+    if (!session) redirect('/sign-in')
+    return (
+        <main className="
+        pt-4  w-full flex flex-col justify-between
+        flex-shrink
+		 items-center
+		">
+            <Chat/>
+        </main>
+    );
 };
 export default ChatPage

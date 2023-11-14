@@ -34,8 +34,11 @@ export default async function RootLayout({
 			<ClientSessionProvider session={session}>
 				<Header/>
 
-				{children}
-				<Toaster/>
+				<main className='flex-grow'>
+					{children}
+					<Toaster/>
+
+				</main>
 
 				<Footer/>
 
