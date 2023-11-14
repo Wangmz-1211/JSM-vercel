@@ -16,6 +16,7 @@ import {
 	FormMessage
 } from "@/components/ui/form";
 import Link from "next/link";
+import OAuthSignIn from "@/app/(root)/(public-pages)/(authentication-pages)/sign-in/components/oauth-sign-in";
 
 const FormSchema = z.object({
 	email: z.string().email(),
@@ -109,7 +110,8 @@ const SignUpForm = () => {
 					)}
 				/>
 				<Button className="w-full bg-green-700 hover:bg-green-600" type='submit'>Sign up</Button>
-				<span>Have an account? <Link href="/sign-in" className="text-blue-400">Sign in</Link></span>
+				<span >Have an account? <Link href="/sign-in" className="text-blue-400">Sign in</Link></span>
+				<OAuthSignIn/>
 			</form>
 		</Form>
 	);
