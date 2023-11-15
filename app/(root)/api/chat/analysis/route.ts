@@ -33,7 +33,7 @@ export async function POST(req: Request) {
 		console.log('RECEIVE A REQUEST')
 
 		const response = await openai.chat.completions.create({
-			model: "gpt-4-32k",
+			model: "gpt-4-1106-preview",
 			messages: [
 				systemMessage,
 				messages[0]
