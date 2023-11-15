@@ -27,13 +27,11 @@ export const SummaryAnalysis = (
 		const cleanedRecords = records.map(record => cleanRecord(record))
 
 		useEffect(() => {
-				console.log(messages)
 				append({
 						role: 'user',
 						content: JSON.stringify(cleanedRecords)
 					}
 				)
-				console.log(messages)
 			}, []
 		)
 		;
@@ -50,15 +48,6 @@ export const SummaryAnalysis = (
 						}
 					)}
 				</section>
-				{/*<form*/}
-				{/*	ref={formRef}*/}
-				{/*	className="flex space-x-4 px-12 w-full*/}
-				{/*          pb-24 pt-4 bg-background*/}
-				{/*          border-t*/}
-				{/*                      "*/}
-				{/*	onSubmit={handleHandleSubmit}>*/}
-				{/*	<Button type="submit">Analysis</Button>*/}
-				{/*</form>*/}
 			</div>
 		)
 			;

@@ -33,13 +33,13 @@ export async function POST(req: Request) {
 		console.log('RECEIVE A REQUEST')
 
 		const response = await openai.chat.completions.create({
-			model: "gpt-3.5-turbo",
+			model: "gpt-4-32k",
 			messages: [
 				systemMessage,
 				messages[0]
 			],
 			stream: true,
-			max_tokens: 64
+			max_tokens: 512
 		})
 
 		const stream = OpenAIStream(response)
