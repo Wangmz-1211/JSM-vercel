@@ -1,6 +1,5 @@
 import {OpenAI} from "openai";
 import {OpenAIStream, StreamingTextResponse} from 'ai'
-// import prisma from "@/app/(root)/api/lib/PrismaClient";
 
 export const runtime = "edge"
 
@@ -17,8 +16,8 @@ export async function POST(req: Request) {
                 {
                     role: 'system',
                     content: 'You are a Japanese language teacher, and you focus on teaching student how to' +
-                        'reach a higher score in JLPT test. You always give advices that could make students' +
-                        'make progress fast.'
+                        'reach a higher score in JLPT test. You can advices that could make students' +
+                        'make progress fast. You use the same language as student.'
                 }
                 , ...messages
             ]
