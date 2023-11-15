@@ -39,7 +39,7 @@ export async function POST(req: Request) {
 				messages[0]
 			],
 			stream: true,
-			max_tokens: 512
+			max_tokens: 2048
 		})
 
 		const stream = OpenAIStream(response)
