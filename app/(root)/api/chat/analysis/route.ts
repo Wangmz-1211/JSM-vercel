@@ -19,7 +19,7 @@ const systemMessage: ChatCompletionMessageParam = {
 		"analysis it, and give the students advice on how to promote the score." +
 		"There are four sections: vocabulary, grammar, reading and listening. The " +
 		"score list would contains the score of each sections. " +
-		"The max score of each section is (vocabulary + grammar) = 60, and that of the" +
+		"The max score of each section is: vocabulary - 38, grammar - 22, and that of the" +
 		"left two sections are both 60." +
 		"The max total score is 180, and 90 is the pass line." +
 		"The title formats like 'N2-2012-07', where N2 is the level, 2012 is the year, and 07 is month." +
