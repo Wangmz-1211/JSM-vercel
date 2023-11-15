@@ -34,7 +34,7 @@ export default async function RootLayout({
 			<ClientSessionProvider session={session}>
 				<Header/>
 
-				<main className='flex-grow w-full'>
+				<main className='flex-grow w-full mt-24'>
 					{children}
 					<Toaster/>
 

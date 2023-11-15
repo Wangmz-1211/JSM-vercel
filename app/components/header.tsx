@@ -4,7 +4,7 @@ import UserAuth from '@/app/components/user-auth'
 
 const Header = () => {
 	return (
-		<header className='w-full border-b border-secondary shadow-md bg-background'>
+		<header className='w-full border-b border-secondary shadow-md bg-background fixed top-0 z-50'>
 			<div className='h-16 p-4 relative'>
 				<h1
 					className='h-8 text-center font-semibold md:text-2xl
