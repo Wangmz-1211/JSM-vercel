@@ -27,6 +27,7 @@ export const SummaryAnalysis = (
 		const cleanedRecords = records.map(record => cleanRecord(record))
 
 		useEffect(() => {
+				console.log('generating analysis...')
 				append({
 						role: 'user',
 						content: JSON.stringify(cleanedRecords)
