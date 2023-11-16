@@ -3,18 +3,14 @@
 import {zodResolver} from "@hookform/resolvers/zod";
 import * as z from 'zod'
 import {useForm} from "react-hook-form";
-import {Form, FormField, FormItem, FormLabel, FormControl, FormMessage} from "@/components/ui/form";
+import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {ScrollArea} from "@/components/ui/scroll-area";
-import {
-	Collapsible,
-	CollapsibleContent,
-	CollapsibleTrigger,
-} from "@/components/ui/collapsible"
-import {ChevronDown} from "lucide-react";
+import {Collapsible, CollapsibleContent, CollapsibleTrigger,} from "@/components/ui/collapsible"
+import {ChevronDown, Loader2} from "lucide-react";
 import {useToast} from "@/components/ui/use-toast";
-import {Dispatch} from "react";
+import {Dispatch, useState} from "react";
 import ScoreDelete from "@/app/(root)/(private-pages)/score/components/score-delete";
 
 
@@ -146,6 +142,9 @@ export default function ScoreEditForm(
 			setRecord: Dispatch<any>,
 			setOpen: Dispatch<any>
 		}) {
+
+
+	const [isLoading, setIsLoading] = useState(false)
 	const {toast} = useToast()
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -175,6 +174,7 @@ export default function ScoreEditForm(
 
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
+		setIsLoading(true)
 		const response = await fetch('/api/score/update', {
 			method: 'PUT',
 			credentials: 'include',
@@ -187,6 +187,7 @@ export default function ScoreEditForm(
 				id: record.id
 			})
 		})
+		setIsLoading(false)
 
 		if (response.ok) {
 			const newRecord = await response.json()
@@ -229,7 +230,10 @@ export default function ScoreEditForm(
 					})}
 
 				</ScrollArea>
-				<Button type="submit" className='float-right w-20'>Edit</Button>
+				<Button disabled={isLoading} type="submit" className='float-right w-20 relative'>
+					Edit
+					{isLoading && <Loader2 className='animate-spin absolute bottom-2 text-secondary'/>}
+				</Button>
 				<ScoreDelete id={record.id}/>
 
 			</form>

@@ -13,11 +13,16 @@ import {
 	AlertDialogTrigger
 } from "@/components/ui/alert-dialog";
 import {useState} from "react";
+import {Loader2} from "lucide-react";
 
 const ScoreDelete = ({id}: { id: string }) => {
-	const [open, setOpen] = useState(false)
+	const [open, setOpen] = useState(false),
+		[isLoading, setIsLoading] = useState(false)
 
-	async function onDelete() {
+
+	async function onDelete(event: React.MouseEvent<HTMLButtonElement>) {
+		event.preventDefault()
+		setIsLoading(true)
 		await fetch('/api/score/delete', {
 			method: "DELETE",
 			headers: {
@@ -28,6 +33,7 @@ const ScoreDelete = ({id}: { id: string }) => {
 				id
 			})
 		})
+		setIsLoading(false)
 		document.location.reload()
 	}
 
@@ -40,7 +46,6 @@ const ScoreDelete = ({id}: { id: string }) => {
 						e.preventDefault()
 						setOpen(true)
 					}}
-					// onClick={onDelete}
 				>
 					Delete
 				</Button>
@@ -55,7 +60,13 @@ const ScoreDelete = ({id}: { id: string }) => {
 				</AlertDialogHeader>
 				<AlertDialogFooter>
 					<AlertDialogCancel>Cancel</AlertDialogCancel>
-					<AlertDialogAction className="bg-jred" onClick={onDelete}>Delete</AlertDialogAction>
+					<AlertDialogAction
+						disabled={isLoading}
+						className="bg-jred relative"
+						onClick={onDelete}>
+						DELETE
+						{isLoading && <Loader2 className='animate-spin absolute bottom-2 text-secondary'/>}
+					</AlertDialogAction>
 				</AlertDialogFooter>
 			</AlertDialogContent>
 		</AlertDialog>

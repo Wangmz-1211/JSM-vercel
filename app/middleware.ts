@@ -7,10 +7,13 @@ export default withAuth(
 	{
 		callbacks: {
 			authorized: ({req, token}) => {
-				if (req.nextUrl.pathname.startsWith('/api/score') && token === null) {
-					return false;
-				}
-				return true;
+				return !((
+						req.nextUrl.pathname.startsWith('/api/score')
+						||
+						req.nextUrl.pathname.startsWith('/api/chat')
+					)
+					&& token === null);
+
 			}
 		}
 	}
