@@ -6,6 +6,7 @@ import Header from "@/app/components/header";
 import {Toaster} from "@/components/ui/toaster";
 import ClientSessionProvider from "@/app/context/client-provider";
 import {auth} from "@/lib/auth";
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata: Metadata = {
 	title: 'JLPT Score Manager',
@@ -46,6 +47,7 @@ export default async function RootLayout({
 			</ClientSessionProvider>
 
 		</ThemeProvider>
+		<Analytics />
 		</body>
 		</html>
 	)
