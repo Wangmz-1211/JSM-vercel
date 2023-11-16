@@ -35,7 +35,7 @@ export default function Chat() {
                             "
                   onSubmit={handleSubmit}>
                 <Input
-                    className="rounded-md p-2 text-black w-full"
+                    className="rounded-md p-2 text-black w-full text-foreground"
                     value={input}
                     onChange={handleInputChange}
                     placeholder="Say something..."
