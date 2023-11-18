@@ -186,12 +186,11 @@ export default function ScoreEditForm({
   });
 
   const onSubmit = (rawData: Record<string, number>) => {
-    const formData = new FormData();
-    Object.keys(rawData).forEach((key) => {
-      formData.append(key, rawData[key].toString());
-    });
-    formData.append("id", record.id);
-    formData.append("user_email", record.user_email);
+    const formData = {
+      ...rawData,
+      id: record.id,
+      user_email: record.user_email,
+    }
     startTransition(async () => {
       const scoreRecord = await updateScore(formData);
       setRecord(scoreRecord);

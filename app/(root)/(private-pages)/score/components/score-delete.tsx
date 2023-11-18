@@ -14,6 +14,7 @@ import {
 import { useState, useTransition } from "react";
 import { deleteScore } from "../actions";
 import { Loader2 } from "lucide-react";
+import { toast } from "@/components/ui/use-toast";
 
 const ScoreDelete = ({
   id,
@@ -24,9 +25,6 @@ const ScoreDelete = ({
 }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [pending, startTransition] = useTransition();
-  const formData = new FormData();
-  formData.append("id", id);
-  const deleteThisScore = deleteScore.bind(null, formData);
 
   return (
     <AlertDialog open={openDialog} onOpenChange={setOpenDialog}>
@@ -49,13 +47,18 @@ const ScoreDelete = ({
             className="bg-jred relative"
             onClick={() => {
               startTransition(async () => {
-                await deleteThisScore();
+                await deleteScore({ id: id });
                 setOpen(false);
                 setOpenDialog(false);
+                toast({
+                  title: "Deleted!",
+                  description: "Your score has been deleted.",
+                });
               });
             }}
           >
-            Delete {pending && <Loader2 className="animate-spin absolute bottom-2" />}
+            Delete{" "}
+            {pending && <Loader2 className="animate-spin absolute bottom-2" />}
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
