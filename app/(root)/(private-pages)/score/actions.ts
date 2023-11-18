@@ -74,42 +74,37 @@ export const createScore = async (formData: FormData) => {
   revalidatePath("/score");
 };
 
-export const updateScore = async (formData: FormData) => {
+export const updateScore = async (formData: Record<string, any>) => {
   const session = await auth();
   if (!session || !session.user || !session.user.email) return;
-  const rawId = formData.get("id");
-  const rawEmail = formData.get("user_email");
-  if (!rawId || !rawEmail) return;
-  const id = rawId.toString(),
-    email = rawEmail.toString();
-  if (email !== session.user.email) return;
+  if (formData.user_email !== session.user.email) return;
   const vocabulary = {
-    v1: parseInt(formData.get("v1")?.toString()!, 10),
-    v2: parseInt(formData.get("v2")?.toString()!, 10),
-    v3: parseInt(formData.get("v3")?.toString()!, 10),
-    v4: parseInt(formData.get("v4")?.toString()!, 10),
-    v5: parseInt(formData.get("v5")?.toString()!, 10),
-    v6: parseInt(formData.get("v6")?.toString()!, 10),
+    v1: formData.v1,
+    v2: formData.v2,
+    v3: formData.v3,
+    v4: formData.v4,
+    v5: formData.v5,
+    v6: formData.v6,
   };
   const grammar = {
-    g7: parseInt(formData.get("g7")?.toString()!, 10),
-    g8: parseInt(formData.get("g8")?.toString()!, 10),
-    g9: parseInt(formData.get("g9")?.toString()!, 10),
+    g7: formData.g7,
+    g8: formData.g8,
+    g9: formData.g9,
   };
   const reading = {
-    r10: parseInt(formData.get("r10")?.toString()!, 10),
-    r11_1: parseInt(formData.get("r11_1")?.toString()!, 10),
-    r11_2: parseInt(formData.get("r11_2")?.toString()!, 10),
-    r12: parseInt(formData.get("r12")?.toString()!, 10),
-    r13: parseInt(formData.get("r13")?.toString()!, 10),
-    r14: parseInt(formData.get("r14")?.toString()!, 10),
+    r10: formData.r10,
+    r11_1: formData.r11_1,
+    r11_2: formData.r11_2,
+    r12: formData.r12,
+    r13: formData.r13,
+    r14: formData.r14,
   };
   const listening = {
-    l1: parseInt(formData.get("l1")?.toString()!, 10),
-    l2: parseInt(formData.get("l2")?.toString()!, 10),
-    l3: parseInt(formData.get("l3")?.toString()!, 10),
-    l4: parseInt(formData.get("l4")?.toString()!, 10),
-    l5: parseInt(formData.get("l5")?.toString()!, 10),
+    l1: formData.l1,
+    l2: formData.l2,
+    l3: formData.l3,
+    l4: formData.l4,
+    l5: formData.l5,
   };
   const vocabulary_score = vocabularyPart(vocabulary);
   const grammar_score = grammarPart(grammar);
@@ -119,8 +114,8 @@ export const updateScore = async (formData: FormData) => {
     vocabulary_score + grammar_score + reading_score + listening_score;
   const record = await prisma.scores.update({
     where: {
-      id: id,
-      user_email: email,
+      id: formData.id,
+      user_email: formData.user_email,
     },
     data: {
       vocabulary: vocabulary,
