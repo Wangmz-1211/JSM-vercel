@@ -23,11 +23,9 @@ export const deleteScore = async (formData: Record<string, any>) => {
   revalidatePath("/score");
 };
 
-export const createScore = async (formData: FormData) => {
-  const rawTitle = formData.get("title");
-  if (!rawTitle) return;
-  const title = rawTitle.toString();
+export const createScore = async (formData: Record<string, any>) => {
   const session = await auth();
+  const { title } = formData;
   if (!title || !session || !session.user || !session.user.email) return;
   await prisma.scores.create({
     data: {

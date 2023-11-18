@@ -37,15 +37,12 @@ const ScoreCreateForm = ({
     },
   });
 
-  const onSubmit = ( rawData: Record<string, any>)=> {
-    const title = rawData.title;
+  const onSubmit = (formData: Record<string, any>) => {
     startTransition(async () => {
-      const formData = new FormData();
-      formData.append("title", title);
       await createScore(formData);
       setDialogOpen(false);
     });
-  }
+  };
 
   return (
     <Form {...form}>
