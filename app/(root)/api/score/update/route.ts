@@ -11,11 +11,11 @@ import {
  * Update the score record of a user's own.
  * @param req the request body should look like this: ```
  * {
- *   // control or identify information
+ *   ! control or identify information
  *   id: string (this is the id of the score record),
  *   user_email: string (no matter which way to sign in, this is available),
  *
- *   // detail information
+ *   ! detail information
  *   v1: number,
  *   v2: number,
  *   v3: number,
