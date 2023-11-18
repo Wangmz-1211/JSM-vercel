@@ -136,5 +136,5 @@ export const updateScore = async (formData: FormData) => {
     },
   });
   revalidatePath("/score");
-  // return record;
+  return record;
 };
