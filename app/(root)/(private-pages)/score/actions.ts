@@ -3,6 +3,12 @@
 import { auth } from "@/lib/auth";
 import prisma from "../../api/lib/PrismaClient";
 import { revalidatePath } from "next/cache";
+import {
+  vocabularyPart,
+  grammarPart,
+  readingPart,
+  listeningPart,
+} from "../../api/lib/ScoreCalculater";
 
 export const deleteScore = async (formData: FormData) => {
   const rawId = formData.get("id");
@@ -67,4 +73,68 @@ export const createScore = async (formData: FormData) => {
   });
   revalidatePath("/score");
   console.log(record);
+};
+
+export const updateScore = async (formData: FormData) => {
+  const session = await auth();
+  if (!session || !session.user || !session.user.email) return;
+  const rawId = formData.get("id");
+  const rawEmail = formData.get("user_email");
+  if (!rawId || !rawEmail) return;
+  const id = rawId.toString(),
+    email = rawEmail.toString();
+  if (email !== session.user.email) return;
+  const vocabulary = {
+    v1: parseInt(formData.get("v1")?.toString()!, 10),
+    v2: parseInt(formData.get("v2")?.toString()!, 10),
+    v3: parseInt(formData.get("v3")?.toString()!, 10),
+    v4: parseInt(formData.get("v4")?.toString()!, 10),
+    v5: parseInt(formData.get("v5")?.toString()!, 10),
+    v6: parseInt(formData.get("v6")?.toString()!, 10),
+  };
+  const grammar = {
+    g7: parseInt(formData.get("g7")?.toString()!, 10),
+    g8: parseInt(formData.get("g8")?.toString()!, 10),
+    g9: parseInt(formData.get("g9")?.toString()!, 10),
+  };
+  const reading = {
+    r10: parseInt(formData.get("r10")?.toString()!, 10),
+    r11_1: parseInt(formData.get("r11_1")?.toString()!, 10),
+    r11_2: parseInt(formData.get("r11_2")?.toString()!, 10),
+    r12: parseInt(formData.get("r12")?.toString()!, 10),
+    r13: parseInt(formData.get("r13")?.toString()!, 10),
+    r14: parseInt(formData.get("r14")?.toString()!, 10),
+  };
+  const listening = {
+    l1: parseInt(formData.get("l1")?.toString()!, 10),
+    l2: parseInt(formData.get("l2")?.toString()!, 10),
+    l3: parseInt(formData.get("l3")?.toString()!, 10),
+    l4: parseInt(formData.get("l4")?.toString()!, 10),
+    l5: parseInt(formData.get("l5")?.toString()!, 10),
+  };
+  const vocabulary_score = vocabularyPart(vocabulary);
+  const grammar_score = grammarPart(grammar);
+  const reading_score = readingPart(reading);
+  const listening_score = listeningPart(listening);
+  const total_score =
+    vocabulary_score + grammar_score + reading_score + listening_score;
+  const record = await prisma.scores.update({
+    where: {
+      id: id,
+      user_email: email,
+    },
+    data: {
+      vocabulary: vocabulary,
+      grammar: grammar,
+      reading: reading,
+      listening: listening,
+      vocabulary_score: vocabulary_score,
+      grammar_score: grammar_score,
+      reading_score: reading_score,
+      listening_score: listening_score,
+      total_score: total_score,
+    },
+  });
+  revalidatePath("/score");
+  // return record;
 };
