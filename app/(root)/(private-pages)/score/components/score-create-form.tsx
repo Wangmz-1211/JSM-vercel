@@ -37,9 +37,19 @@ const ScoreCreateForm = ({
     },
   });
 
+  const onSubmit = ( rawData: Record<string, any>)=> {
+    const title = rawData.title;
+    startTransition(async () => {
+      const formData = new FormData();
+      formData.append("title", title);
+      await createScore(formData);
+      setDialogOpen(false);
+    });
+  }
+
   return (
     <Form {...form}>
-      <form action={createScore} className="space-y-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
           name="title"
@@ -57,16 +67,7 @@ const ScoreCreateForm = ({
         />
         <Button
           disabled={pending}
-          onClick={() => {
-            startTransition(async () => {
-              const { title } = form.getValues();
-              const formData = new FormData();
-              formData.append("title", title);
-              await createScore(formData);
-              setDialogOpen(false);
-            });
-          }}
-          // type="submit"
+          type="submit"
           className="float-right relative"
         >
           Create
