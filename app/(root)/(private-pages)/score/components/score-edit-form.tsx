@@ -11,7 +11,6 @@ import {Collapsible, CollapsibleContent, CollapsibleTrigger,} from "@/components
 import {ChevronDown, Loader2} from "lucide-react";
 import {useToast} from "@/components/ui/use-toast";
 import {Dispatch, useState} from "react";
-import ScoreDelete from "@/app/(root)/(private-pages)/score/components/score-delete";
 
 
 const formSchema = z.object({
@@ -234,7 +233,6 @@ export default function ScoreEditForm(
 					Edit
 					{isLoading && <Loader2 className='animate-spin absolute bottom-2 text-secondary'/>}
 				</Button>
-				<ScoreDelete id={record.id}/>
 
 			</form>
 		</Form>

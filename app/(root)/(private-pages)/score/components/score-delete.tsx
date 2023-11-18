@@ -1,76 +1,65 @@
-'use client'
+"use client";
 
-import {Button} from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
-	AlertDialog,
-	AlertDialogAction,
-	AlertDialogCancel,
-	AlertDialogContent,
-	AlertDialogDescription,
-	AlertDialogFooter,
-	AlertDialogHeader,
-	AlertDialogTitle,
-	AlertDialogTrigger
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import {useState} from "react";
-import {Loader2} from "lucide-react";
+import { useState, useTransition } from "react";
+import { deleteScore } from "../actions";
+import { Loader2 } from "lucide-react";
 
-const ScoreDelete = ({id}: { id: string }) => {
-	const [open, setOpen] = useState(false),
-		[isLoading, setIsLoading] = useState(false)
+const ScoreDelete = ({
+  id,
+  setOpen,
+}: {
+  id: string;
+  setOpen: React.Dispatch<any>;
+}) => {
+  const [openDialog, setOpenDialog] = useState(false);
+  const [pending, startTransition] = useTransition();
+  const formData = new FormData();
+  formData.append("id", id);
+  const deleteThisScore = deleteScore.bind(null, formData);
 
+  return (
+    <AlertDialog open={openDialog} onOpenChange={setOpenDialog}>
+      <AlertDialogTrigger asChild>
+        <Button className="bg-jred float-left w-20 mr-2">Delete</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete your
+            score record and remove the data from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
 
-	async function onDelete(event: React.MouseEvent<HTMLButtonElement>) {
-		event.preventDefault()
-		setIsLoading(true)
-		await fetch('/api/score/delete', {
-			method: "DELETE",
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			credentials: 'include',
-			body: JSON.stringify({
-				id
-			})
-		})
-		setIsLoading(false)
-		document.location.reload()
-	}
-
-	return (
-		<AlertDialog open={open} onOpenChange={setOpen}>
-			<AlertDialogTrigger>
-				<Button
-					className="bg-jred float-right w-20 mr-2"
-					onClick={(e) => {
-						e.preventDefault()
-						setOpen(true)
-					}}
-				>
-					Delete
-				</Button>
-			</AlertDialogTrigger>
-			<AlertDialogContent>
-				<AlertDialogHeader>
-					<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-					<AlertDialogDescription>
-						This action cannot be undone. This will permanently delete your score record
-						and remove the data from our servers.
-					</AlertDialogDescription>
-				</AlertDialogHeader>
-				<AlertDialogFooter>
-					<AlertDialogCancel>Cancel</AlertDialogCancel>
-					<AlertDialogAction
-						disabled={isLoading}
-						className="bg-jred relative"
-						onClick={onDelete}>
-						DELETE
-						{isLoading && <Loader2 className='animate-spin absolute bottom-2 text-secondary'/>}
-					</AlertDialogAction>
-				</AlertDialogFooter>
-			</AlertDialogContent>
-		</AlertDialog>
-	)
-
-}
-export default ScoreDelete
+          <Button
+            disabled={pending}
+            className="bg-jred relative"
+            onClick={() => {
+              startTransition(async () => {
+                await deleteThisScore();
+                setOpen(false);
+                setOpenDialog(false);
+              });
+            }}
+          >
+            Delete {pending && <Loader2 className="animate-spin absolute bottom-2" />}
+          </Button>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  );
+};
+export default ScoreDelete;
