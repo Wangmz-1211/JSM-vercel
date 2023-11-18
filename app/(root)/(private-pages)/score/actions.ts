@@ -10,10 +10,8 @@ import {
   listeningPart,
 } from "../../api/lib/ScoreCalculater";
 
-export const deleteScore = async (formData: FormData) => {
-  const rawId = formData.get("id");
-  if (!rawId) return;
-  const id = rawId.toString();
+export const deleteScore = async (formData: Record<string, any>) => {
+  const { id } = formData;
   const session = await auth();
   if (!id || !session || !session.user || !session.user.email) return;
 
