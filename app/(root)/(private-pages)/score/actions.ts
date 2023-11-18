@@ -31,7 +31,7 @@ export const createScore = async (formData: FormData) => {
   const title = rawTitle.toString();
   const session = await auth();
   if (!title || !session || !session.user || !session.user.email) return;
-  const record = await prisma.scores.create({
+  await prisma.scores.create({
     data: {
       v: 0,
       title: title,
@@ -72,7 +72,6 @@ export const createScore = async (formData: FormData) => {
     },
   });
   revalidatePath("/score");
-  console.log(record);
 };
 
 export const updateScore = async (formData: FormData) => {
