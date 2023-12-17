@@ -7,6 +7,7 @@ import {Toaster} from "@/components/ui/toaster";
 import ClientSessionProvider from "@/app/context/client-provider";
 import {auth} from "@/lib/auth";
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
 	title: 'JLPT Score Manager',
