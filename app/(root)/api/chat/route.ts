@@ -31,7 +31,7 @@ const openai = new OpenAI({
 export async function POST(req: Request) {
 	try {
 		let {messages} = await req.json()
-		console.log(messages)
+		console.log("Received a new request, it's content is: ", messages, "\nCall open on ", openai.baseURL)
 		if (messages.length === 1) {
 			messages = [
 				{
