@@ -30,6 +30,7 @@ type ChatCompletionMessageParam = {
 
 const openai = new OpenAI({
 	apiKey: process.env.OPENAI_KEY,
+    baseURL: process.env.OPENAI_BASE_URL,
 });
 
 const systemMessage: ChatCompletionMessageParam = {
@@ -53,7 +54,7 @@ export async function POST(req: Request) {
 		console.log('RECEIVE A REQUEST')
 
 		const response = await openai.chat.completions.create({
-			model: "gpt-4-1106-preview",
+			model: "gpt-3.5-turbo",
 			messages: [
 				systemMessage,
 				messages[0]
