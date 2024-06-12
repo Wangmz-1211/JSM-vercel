@@ -51,10 +51,9 @@ const systemMessage: ChatCompletionMessageParam = {
 export async function POST(req: Request) {
 	try {
 		let {messages} = await req.json()
-		console.log('RECEIVE A REQUEST')
 
 		const response = await openai.chat.completions.create({
-			model: "gpt-3.5-turbo",
+			model: "gpt-3.5-turbo-16k",
 			messages: [
 				systemMessage,
 				messages[0]
@@ -62,6 +61,8 @@ export async function POST(req: Request) {
 			stream: true,
 			max_tokens: 2048
 		})
+    
+        console.log("The request is: ", response)
 
 		const stream = OpenAIStream(response)
 		return new StreamingTextResponse(stream)

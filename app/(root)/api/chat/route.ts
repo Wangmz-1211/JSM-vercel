@@ -44,7 +44,7 @@ export async function POST(req: Request) {
 		}
 		console.log("Sending request: ", messages, "\nCall openAI on ", openai.baseURL, "\nWith API Secret: ", openai.apiKey)
 		const response = await openai.chat.completions.create({
-			model: "gpt-3.5-turbo",
+			model: "gpt-3.5-turbo-16k",
 			messages,
 			stream: true,
 			max_tokens: 1024
