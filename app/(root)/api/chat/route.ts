@@ -31,7 +31,6 @@ const openai = new OpenAI({
 export async function POST(req: Request) {
 	try {
 		let {messages} = await req.json()
-		console.log("Received a new request, it's content is: ", messages, "\nCall open on ", openai.baseURL)
 		if (messages.length === 1) {
 			messages = [
 				{
@@ -43,6 +42,7 @@ export async function POST(req: Request) {
 				, ...messages
 			]
 		}
+		console.log("Sending request: ", messages, "\nCall openAI on ", openai.baseURL, "\nWith API Secret: ", openai.apiKey)
 		const response = await openai.chat.completions.create({
 			model: "gpt-3.5-turbo",
 			messages,
