@@ -38,7 +38,6 @@ export default function Chat() {
                     className="rounded-md p-2 text-black w-full text-foreground"
                     value={input}
                     onChange={handleInputChange}
-                    placeholder="There is something wrong with my API account.. "
                 />
                 <Button
                     type="submit"
