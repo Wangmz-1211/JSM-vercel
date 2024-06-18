@@ -101,7 +101,7 @@ const SignUpForm = () => {
 					name="password"
 					render={({field}) => (
 						<FormItem className="w-full">
-							<FormLabel>Email address</FormLabel>
+							<FormLabel>Password</FormLabel>
 							<FormControl>
 								<Input {...field} type="password"></Input>
 							</FormControl>
