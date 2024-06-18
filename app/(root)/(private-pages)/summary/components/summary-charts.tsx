@@ -11,7 +11,7 @@ export const SummaryCharts = (
 
 
 	return (
-		<div className="w-11/12 mx-auto">
+		<div className="w-2/3 mx-auto">
 			<SummaryChartsLine records={records} level="N2"/>
 		</div>
 	)
