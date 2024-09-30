@@ -1,27 +1,27 @@
 import {OpenAI} from "openai";
 import {OpenAIStream, StreamingTextResponse} from 'ai'
 
-// export const runtime = "edge"
-// export const preferredRegion = [
-// 	'arn1',
-// 	'bom1',
-// 	'cdg1',
-// 	'cle1',
-// 	'cpt1',
-// 	'dub1',
-// 	'fra1',
-// 	'gru1',
-// 	// 'hkg1', ip blocked by openai
-// 	'hnd1',
-// 	'iad1',
-// 	'icn1',
-// 	'kix1',
-// 	'lhr1',
-// 	'pdx1',
-// 	'sfo1',
-// 	'sin1',
-// 	'syd1',
-// ]
+export const runtime = "edge"
+export const preferredRegion = [
+	'arn1',
+	'bom1',
+	'cdg1',
+	'cle1',
+	'cpt1',
+	'dub1',
+	'fra1',
+	'gru1',
+	// 'hkg1', ip blocked by openai
+	'hnd1',
+	'iad1',
+	'icn1',
+	'kix1',
+	'lhr1',
+	'pdx1',
+	'sfo1',
+	'sin1',
+	'syd1',
+]
 
 const openai = new OpenAI({
 	apiKey: process.env.OPENAI_KEY,
@@ -44,7 +44,7 @@ export async function POST(req: Request) {
 		}
 		console.log("Sending request: ", messages, "\nCall openAI on ", openai.baseURL, "\nWith API Secret: ", openai.apiKey)
 		const response = await openai.chat.completions.create({
-			model: "gpt-3.5-turbo-16k",
+			model: "gpt-4o-mini",
 			messages,
 			stream: true,
 			max_tokens: 1024
