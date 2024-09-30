@@ -1,27 +1,27 @@
 import {OpenAI} from "openai";
 import {OpenAIStream, StreamingTextResponse} from 'ai'
 
-export const runtime = "edge"
-export const preferredRegion = [
-	'arn1',
-	'bom1',
-	'cdg1',
-	'cle1',
-	'cpt1',
-	'dub1',
-	'fra1',
-	'gru1',
-	// 'hkg1', ip blocked by openai
-	'hnd1',
-	'iad1',
-	'icn1',
-	'kix1',
-	'lhr1',
-	'pdx1',
-	'sfo1',
-	'sin1',
-	'syd1',
-]
+// export const runtime = "edge"
+// export const preferredRegion = [
+// 	'arn1',
+// 	'bom1',
+// 	'cdg1',
+// 	'cle1',
+// 	'cpt1',
+// 	'dub1',
+// 	'fra1',
+// 	'gru1',
+// 	// 'hkg1', ip blocked by openai
+// 	'hnd1',
+// 	'iad1',
+// 	'icn1',
+// 	'kix1',
+// 	'lhr1',
+// 	'pdx1',
+// 	'sfo1',
+// 	'sin1',
+// 	'syd1',
+// ]
 
 const openai = new OpenAI({
 	apiKey: process.env.OPENAI_KEY,
