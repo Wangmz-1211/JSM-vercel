@@ -31,7 +31,6 @@ export default async function RootLayout({
           attribute="class"
           defaultTheme="system"
           enableSystem
-          // disableTransitionOnChange
         >
           <ClientSessionProvider session={session}>
             <Header />
@@ -39,6 +38,7 @@ export default async function RootLayout({
             <main className="flex-grow w-full mt-24">
               {children}
               <Toaster />
+              <SpeedInsights />
             </main>
 
             <Footer />
