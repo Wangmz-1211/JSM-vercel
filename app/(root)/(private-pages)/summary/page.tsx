@@ -3,6 +3,7 @@ import {auth} from "@/lib/auth";
 import {redirect} from "next/navigation";
 import prisma from "@/app/(root)/api/lib/PrismaClient";
 import SummaryAnalysis from "@/app/(root)/(private-pages)/summary/components/summary-analysis";
+import { scores } from "@prisma/client";
 
 const Summary = async () => {
   const session = await auth()
@@ -12,7 +13,7 @@ const Summary = async () => {
       user_email: session!.user!.email!.toLowerCase()
     }
   })
-  const sortedRecords = records.sort((a, b) => {
+  const sortedRecords = records.sort((a: scores, b: scores) => {
     const aTitle = a.title.split('-');
     const bTitle = b.title.split('-');
     if (aTitle[0] === bTitle[0]) {

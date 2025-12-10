@@ -10,7 +10,7 @@ import {NextResponse} from "next/server";
  */
 export async function POST(req: Request) {
 	try {
-		const cookieStore = cookies()
+		const cookieStore = await cookies()
 		const sessionToken = cookieStore.get('sessionToken')
 		if (!sessionToken) return Response.json(null, {status: 400})
 		const user = await prisma.users.findFirst({

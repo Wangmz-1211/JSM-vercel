@@ -3,7 +3,7 @@ import prisma from "@/app/(root)/api/lib/PrismaClient";
 import {auth} from "@/lib/auth";
 import {redirect} from "next/navigation";
 import ScoreCreateDialog from "@/app/(root)/(private-pages)/score/components/score-create-dialog";
-
+import { scores } from "@prisma/client";
 
 const ScoreList = async () => {
 
@@ -16,7 +16,7 @@ const ScoreList = async () => {
 		}
 	})
 
-	const sortedScores = scores.sort((a, b) => {
+	const sortedScores = scores.sort((a: scores, b: scores) => {
 		const aTitle = a.title.split('-');
 		const bTitle = b.title.split('-');
 		if (aTitle[0] === bTitle[0]) {
