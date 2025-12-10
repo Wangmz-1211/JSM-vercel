@@ -1,6 +1,6 @@
 import prisma from "@/app/(root)/api/lib/PrismaClient";
-import {hashCode, random} from "@/app/(root)/api/lib/Authentication";
-import {NextResponse} from "next/server";
+import { hashCode, random } from "@/app/(root)/api/lib/Authentication";
+import { NextResponse } from "next/server";
 
 /**
  * Login. After validating the email and password, generate a session token
@@ -9,49 +9,38 @@ import {NextResponse} from "next/server";
  * @constructor
  */
 export async function POST(req: Request) {
-	try {
-		// input check
-		let {email, password} = await req.json()
-		if (!email || !password) return Response.json("Please input correct email and password.", {status: 400})
+  try {
+    // input check
+    let { email, password } = await req.json();
+    if (!email || !password)
+      return Response.json("Please input correct email and password.", {
+        status: 400,
+      });
 
-		// get user information from db
-		const user = await prisma.users.findFirst({
-			where: {
-				email
-			}
-		})
-		if (!user) return Response.json("user doesn't exist", {status: 400})
+    // get user information from db
+    const user = await prisma.users.findFirst({
+      where: {
+        email,
+      },
+    });
+    if (!user) return Response.json("Invalid credentials.", { status: 401 });
 
-		// check password
-		const expectedHash = hashCode(user.salt, password)
-		if (expectedHash !== user.hash)
-			return Response.json("Incorrect username or password.", {status: 400})
+    // check password
+    const expectedHash = hashCode(user.salt, password);
+    if (expectedHash !== user.hash)
+      return Response.json("Invalid credentials.", { status: 401 });
 
-		// generate a new session token and send to both client and db
-		const sessionToken = random()
-		await prisma.users.update({
-			where: {id: user.id},
-			data: {sessionToken: sessionToken}
-		})
+    // remove authentication information from the object
+    // @ts-ignore
+    delete user.sessionToken;
+    // @ts-ignore
+    delete user.hash;
+    // @ts-ignore
+    delete user.salt;
 
-		// remove authentication information from the object
-		// @ts-ignore
-		delete user.sessionToken
-		// @ts-ignore
-		delete user.hash
-		// @ts-ignore
-		delete user.salt
-		const response = NextResponse.json(user, {status: 200})
-		response.cookies.set({
-			name: 'sessionToken',
-			value: sessionToken,
-			maxAge: 3600,
-			path: '/'
-		})
-		return response
-	} catch (e) {
-		console.error(e)
-		return Response.error()
-
-	}
+    return NextResponse.json(user, { status: 200 });
+  } catch (e) {
+    console.error(e);
+    return Response.error();
+  }
 }
